@@ -1,0 +1,64 @@
+version: '3.7'
+services:   
+  web:
+    image: nginx:stable-alpine3.17-slim
+    container_name: web
+    depends_on:
+      - php1
+      - php2
+      - php3
+    volumes:
+      - ./data/web:/var/www/html
+      - ./config/nginx:/etc/nginx/conf.d/
+    ports:
+      - "8080:80"
+    networks:
+      - lb-net
+
+  php1:
+    build: docker/php8.3-fpm
+    container_name: php1
+    depends_on:
+      - redis
+    volumes:
+      - ./data/web:/var/www/html
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+    networks:
+      - lb-net
+
+  php2:
+    build: docker/php8.3-fpm
+    container_name: php2
+    depends_on:
+      - redis
+    volumes:
+      - ./data/web:/var/www/html
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+    networks:
+      - lb-net
+
+  php3:
+    build: docker/php8.3-fpm
+    container_name: php3
+    depends_on:
+      - redis
+    volumes:
+      - ./data/web:/var/www/html
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+    networks:
+      - lb-net
+
+  redis:
+    image: redis/redis-stack
+    container_name: redis
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - 6379:6379
+      - 8001:8001
+    networks:
+      - lb-net
+
+networks:
+  lb-net:
+    name: lb-network
