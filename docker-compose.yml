@@ -18,6 +18,7 @@ services:
   php1:
     build: docker/php8.3-fpm
     container_name: php1
+    hostname: php1.net
     depends_on:
       - redis
     volumes:
@@ -29,6 +30,7 @@ services:
   php2:
     build: docker/php8.3-fpm
     container_name: php2
+    hostname: php2.net
     depends_on:
       - redis
     volumes:
@@ -40,6 +42,7 @@ services:
   php3:
     build: docker/php8.3-fpm
     container_name: php3
+    hostname: php3.net
     depends_on:
       - redis
     volumes:
