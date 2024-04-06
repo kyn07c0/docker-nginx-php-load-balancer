@@ -2,6 +2,8 @@
 The example demonstrates load balancing between PHP services using NGINX. 
 Redis is used to store sessions.
 
+![Schema load balancer](https://github.com/kyn07c0/docker-nginx-php-load-balancer/assets/50650263/0cdd3c29-ade7-43c8-b535-fdcf76a4367c)
+
 ## Project structure
 ```
 docker-nginx-php-load-balancer
